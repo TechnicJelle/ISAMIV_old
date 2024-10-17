@@ -22,4 +22,23 @@ jobs:
       - name: Upload Build
         uses: actions/upload-artifact@v4
         with:
+          name: "ISAMIV-Linux"
+          path: 'build/Release/'
+
+  build-windows:
+    name: Build for Windows
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+      - name: Configure
+        run: cmake -DCMAKE_BUILD_TYPE=Release -A x64 -S . -B build
+      - name: Build
+        run: cmake --build build --parallel --config Release --target ISAMIV
+      - name: Upload Build
+        uses: actions/upload-artifact@v4
+        with:
+          name: "ISAMIV-Windows"
           path: 'build/Release/'
