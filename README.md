@@ -1,3 +1,8 @@
 # ISAMIV
+_I Suck At Making Image Viewers_
 
-I Suck At Making Image Viewers
+This is a small image viewer project that will include a way to programmatically define image parsers.  
+So you can view any kind of image in this viewer, provided you write a parser for it.
+
+## Credits
+CMake setup partly from https://github.com/Ravbug/sdl3-sample/
