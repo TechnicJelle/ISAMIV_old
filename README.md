@@ -1,3 +1,5 @@
+**Go here for the new version: https://github.com/TechnicJelle/ISAMIV**
+
 # ISAMIV
 _I Suck At Making Image Viewers_
 
