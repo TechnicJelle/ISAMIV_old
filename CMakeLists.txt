@@ -17,7 +17,15 @@ set(EXECUTABLE_NAME ${PROJECT_NAME})
 add_executable(${EXECUTABLE_NAME})
 
 find_package(OpenGL REQUIRED)
-target_link_libraries(${EXECUTABLE_NAME} PUBLIC ${OPENGL_LIBRARIES})
+target_link_libraries(${EXECUTABLE_NAME} PRIVATE ${OPENGL_LIBRARIES})
+
+# Glad
+set(GLAD_DIR ${CMAKE_CURRENT_SOURCE_DIR}/deps/glad)
+include_directories(${GLAD_DIR}/include)
+
+set(GLAD_SOURCES
+		${GLAD_DIR}/src/gl.c
+)
 
 # Dear ImGui
 set(IMGUI_DIR ${CMAKE_CURRENT_SOURCE_DIR}/deps/imgui)
@@ -39,6 +47,7 @@ set(IMGUI_SOURCES
 target_sources(${EXECUTABLE_NAME}
 		PRIVATE
 		src/main.cpp
+		${GLAD_SOURCES}
 		${IMGUI_SOURCES}
 )
 

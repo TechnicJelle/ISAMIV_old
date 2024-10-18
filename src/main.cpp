@@ -1,8 +1,8 @@
+#include <glad/gl.h>
 #include <imgui.h>
 #include <imgui_impl_sdl3.h>
 #include <imgui_impl_opengl3.h>
 #include <SDL3/SDL.h>
-#include <SDL3/SDL_opengl.h>
 #include <SDL3/SDL_main.h>
 #include <iostream>
 
@@ -24,7 +24,7 @@ int main(int argc, char* argv[]) {
 	SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
 	SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE, 8);
 	SDL_WindowFlags window_flags = SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE | SDL_WINDOW_HIDDEN;
-	SDL_Window* window = SDL_CreateWindow("ISAMIV", 640, 480, window_flags);
+	SDL_Window* window = SDL_CreateWindow("ISAMIV", 1280, 720, window_flags);
 	if (window == nullptr) {
 		SDL_Log("SDL_CreateWindow failed (%s)", SDL_GetError());
 		SDL_Quit();
@@ -32,6 +32,8 @@ int main(int argc, char* argv[]) {
 	}
 	SDL_SetWindowPosition(window, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
 	SDL_GLContext gl_context = SDL_GL_CreateContext(window);
+	int version = gladLoadGL((GLADloadfunc) SDL_GL_GetProcAddress);
+	std::cout << "GL " << GLAD_VERSION_MAJOR(version) << "." << GLAD_VERSION_MINOR(version) << std::endl;
 	SDL_GL_MakeCurrent(window, gl_context);
 	SDL_GL_SetSwapInterval(1); // Enable vsync
 	SDL_ShowWindow(window);
