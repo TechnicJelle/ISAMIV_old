@@ -16,10 +16,30 @@ set(EXECUTABLE_NAME ${PROJECT_NAME})
 
 add_executable(${EXECUTABLE_NAME})
 
+find_package(OpenGL REQUIRED)
+target_link_libraries(${EXECUTABLE_NAME} PUBLIC ${OPENGL_LIBRARIES})
+
+# Dear ImGui
+set(IMGUI_DIR ${CMAKE_CURRENT_SOURCE_DIR}/deps/imgui)
+include_directories(${IMGUI_DIR})
+include_directories(${IMGUI_DIR}/backends)
+
+set(IMGUI_SOURCES
+		${IMGUI_DIR}/imgui.cpp
+		${IMGUI_DIR}/imgui_demo.cpp
+		${IMGUI_DIR}/imgui_draw.cpp
+		${IMGUI_DIR}/imgui_tables.cpp
+		${IMGUI_DIR}/imgui_widgets.cpp
+		# Specific implementations:
+		${IMGUI_DIR}/backends/imgui_impl_sdl3.cpp
+		${IMGUI_DIR}/backends/imgui_impl_opengl3.cpp
+)
+
 # Add your sources to the target
 target_sources(${EXECUTABLE_NAME}
 		PRIVATE
 		src/main.cpp
+		${IMGUI_SOURCES}
 )
 
 # Set C++ version
