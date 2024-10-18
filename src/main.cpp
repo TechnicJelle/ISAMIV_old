@@ -20,7 +20,8 @@ int main(int argc, char* argv[]) {
 		bool finished = false;
 		SDL_Event event;
 		while (SDL_PollEvent(&event)) {
-			if (event.type == SDL_EVENT_QUIT) {
+			if (event.type == SDL_EVENT_QUIT
+				|| (event.type == SDL_EVENT_KEY_DOWN && (event.key.key == SDLK_ESCAPE || event.key.key == SDLK_Q))) {
 				finished = true;
 				break;
 			}
