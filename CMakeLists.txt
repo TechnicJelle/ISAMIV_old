@@ -43,12 +43,25 @@ set(IMGUI_SOURCES
 		${IMGUI_DIR}/backends/imgui_impl_opengl3.cpp
 )
 
+# Tex Inspect
+set(TEXINSPECT_DIR ${CMAKE_CURRENT_SOURCE_DIR}/deps/imgui_tex_inspect)
+include_directories(${TEXINSPECT_DIR})
+include_directories(${TEXINSPECT_DIR}/backends)
+add_compile_definitions(IMGUI_IMPL_OPENGL_LOADER_GLAD2)
+
+set(TEXINSPECT_SOURCES
+		${TEXINSPECT_DIR}/imgui_tex_inspect.cpp
+		# Specific implementations:
+		${TEXINSPECT_DIR}/backends/tex_inspect_opengl.cpp
+)
+
 # Add your sources to the target
 target_sources(${EXECUTABLE_NAME}
 		PRIVATE
 		src/main.cpp
 		${GLAD_SOURCES}
 		${IMGUI_SOURCES}
+		${TEXINSPECT_SOURCES}
 )
 
 # Set C++ version

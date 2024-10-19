@@ -5,3 +5,6 @@
 	path = deps/imgui
 	url = https://github.com/ocornut/imgui.git
 	branch = docking
+[submodule "deps/imgui_tex_inspect"]
+	path = deps/imgui_tex_inspect
+	url = https://github.com/andyborrell/imgui_tex_inspect.git

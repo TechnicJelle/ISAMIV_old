@@ -2,6 +2,8 @@
 #include <imgui.h>
 #include <imgui_impl_sdl3.h>
 #include <imgui_impl_opengl3.h>
+#include <imgui_tex_inspect.h>
+#include <tex_inspect_opengl.h>
 #include <SDL3/SDL.h>
 #include <SDL3/SDL_main.h>
 #include <iostream>
@@ -54,6 +56,10 @@ int main(int argc, char* argv[]) {
 	ImGui_ImplSDL3_InitForOpenGL(window, gl_context);
 	ImGui_ImplOpenGL3_Init(glsl_version);
 
+	ImGuiTexInspect::ImplOpenGL3_Init();
+	ImGuiTexInspect::Init();
+	ImGuiTexInspect::CreateContext();
+
 	// Our state
 	bool show_demo_window = true;
 	ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
@@ -84,6 +90,12 @@ int main(int argc, char* argv[]) {
 		// 1. Show the big demo window (Most of the sample code is in ImGui::ShowDemoWindow()! You can browse its code to learn more about Dear ImGui!).
 		if (show_demo_window)
 			ImGui::ShowDemoWindow(&show_demo_window);
+
+		ImGui::Begin("Example Texture##screenshot2");
+		ImGuiTexInspect::BeginInspectorPanel("Inspector", 1, {512, 64});
+//		ImGuiTexInspect::DrawAnnotations(ImGuiTexInspect::ValueText(ImGuiTexInspect::ValueText::Floats));
+		ImGuiTexInspect::EndInspectorPanel();
+		ImGui::End();
 
 		// Rendering
 		ImGui::Render();
